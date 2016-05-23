@@ -17,24 +17,50 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "docs": "verb"
   },
   "dependencies": {},
   "devDependencies": {
-    "gulp-format-md": "*",
-    "mocha": "^2.5.1"
+    "gulp-format-md": "^0.1.9",
+    "mocha": "^2.5.1",
+    "verb-readme-generator": "^0.1.12"
   },
-  "keywords": [],
+  "keywords": [
+    "convert",
+    "converttest",
+    "exec",
+    "ext",
+    "extension",
+    "extname",
+    "file",
+    "match",
+    "regex"
+  ],
   "verb": {
+    "toc": false,
     "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "generators": {
+      "readme": "verb-readme-generator"
+    },
     "plugins": [
       "gulp-format-md"
     ],
     "related": {
-      "list": []
+      "list": [
+        "dotfile-regex",
+        "ext-regex",
+        "filename-regex"
+      ]
     },
     "reflinks": [
       "verb"
-    ]
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
