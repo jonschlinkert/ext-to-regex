@@ -9,9 +9,18 @@ describe('ext-to-regex', function() {
     assert.equal(typeof extRegex, 'function');
   });
 
-  it('should export an object', function() {
-    assert(extRegex);
-    assert.equal(typeof extRegex, 'object');
+  it('should convert a string to a regex', function() {
+    assert.deepEqual(extRegex('.js'), /\.js$/);
+    assert.deepEqual(extRegex('js'), /\.js$/);
+    assert.deepEqual(extRegex('.coffee.js'), /\.coffee\.js$/);
+    assert.deepEqual(extRegex('coffee.js'), /\.coffee\.js$/);
+  });
+
+  it('should convert an array to a regex', function() {
+    assert.deepEqual(extRegex(['.js', '.md']), /\.(?:js|md)$/);
+    assert.deepEqual(extRegex(['js', '.md']), /\.(?:js|md)$/);
+    assert.deepEqual(extRegex(['js', 'md', 'coffee.js']), /\.(?:js|md|coffee\.js)$/);
+    assert.deepEqual(extRegex(['js', 'md', '.coffee.js']), /\.(?:js|md|coffee\.js)$/);
   });
 
   it('should throw an error when invalid args are passed', function(cb) {
@@ -20,8 +29,7 @@ describe('ext-to-regex', function() {
       cb(new Error('expected an error'));
     } catch (err) {
       assert(err);
-      assert.equal(err.message, 'expected first argument to be a string');
-      assert.equal(err.message, 'expected callback to be a function');
+      assert.equal(err.message, 'expected a string or array');
       cb();
     }
   });
